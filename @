@@ -1,0 +1,32 @@
+import cv2
+import face_recognition
+import pyttsx3
+
+# Text-to-Speech Engine സെറ്റ് ചെയ്യുന്നു
+engine = pyttsx3.init()
+
+# ചിത്രം ലോഡ് ചെയ്യുന്നു
+image = cv2.imread("aby.jpg")
+
+# ഇമേജ് ഫോർമാറ്റ് മാറ്റുന്നു
+rgb_image = cv2.cvtColor(image, cv2.COLOR_BGR2RGB)
+
+# മുഖങ്ങളുടെ പ്രത്യേകതകൾ കണ്ടെത്തുന്നു
+face_encodings = face_recognition.face_encodings(rgb_image)[0]
+
+# അറിയപ്പെടുന്ന മുഖങ്ങളുടെ എൻകോഡിംഗും പേരുകളും
+known_face_encodings = [face_encodings]
+known_face_names = ["Abhilash"]
+
+# ചിത്രത്തിലെ മുഖം അറിയപ്പെടുന്ന മുഖങ്ങളുമായി താരതമ്യം ചെയ്യുന്നു
+matches = face_recognition.compare_faces(known_face_encodings, face_encodings)
+name = "Unknown"
+
+if True in matches:
+    first_match_index = matches.index(True)
+    name = known_face_names[first_match_index]
+
+# തിരിച്ചറിഞ്ഞ പേര് ശബ്ദത്തിൽ പറയുന്നു
+engine.say(f"Hello, {name}")
+engine.runAndWait()
+
