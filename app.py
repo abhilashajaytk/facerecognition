@@ -75,7 +75,7 @@ while True:
         # പേര് എഴുതാനുള്ള ബാക്ക്ഗ്രൗണ്ട് ബോക്സ്
         cv2.rectangle(frame, (left, bottom - 35), (right, bottom), (0, 255, 0), cv2.FILLED)
         font = cv2.FONT_HERSHEY_DUPLEX
-        cv2.putText(frame, name, (left + 6, bottom - 6), font, 0.6, (255, 255, 255), 1)
+        cv2.putText(frame, name, (left + 6, bottom - 6), font, 0.6, (0, 0, 0), 1)
 
     cv2.imshow('Video Face Recognition', frame)
 
